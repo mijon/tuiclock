@@ -43,7 +43,7 @@ impl EventHandler {
                                     Ok(())
                                 }
                             },
-                            _ => unimplemented!(),
+                            _ => Ok(()),
                         }
                         .expect("failed to send terminal event.")
                     }

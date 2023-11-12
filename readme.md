@@ -2,6 +2,8 @@
 
 This is a simple tui clock written in Rust.
 
+The code is *heavily* inspired by the [ratatui](https://ratatui.rs/) book.
+
 ## Installation
 
 - Clone the repo

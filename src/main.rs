@@ -3,7 +3,7 @@ pub mod event;
 pub mod ui;
 pub mod tui;
 pub mod update;
-
+pub mod cli;
 
 use anyhow::Result;
 use app::App;
@@ -11,6 +11,8 @@ use event::{Event, EventHandler};
 use ratatui::{backend::CrosstermBackend, Terminal};
 use tui::Tui;
 use crate::update::update;
+use cli::Cli;
+use clap::Parser;
 
 // fn get_time2(format: &str) {
 //     let date = Local::now();
@@ -27,13 +29,14 @@ use crate::update::update;
 
 
 fn main() -> Result<()> {
+    let args = Cli::parse();
 
     let mut app = App { should_quit: false,
-                    time_format: "%H:%M:%S".to_string(), };
+                    time_format: args.format.to_string(), };
 
     let backend = CrosstermBackend::new(std::io::stderr());
     let terminal = Terminal::new(backend)?;
-    let events = EventHandler::new(250);
+    let events = EventHandler::new(args.tick_rate);
 
     let mut tui = Tui::new(terminal, events);
     tui.enter()?;

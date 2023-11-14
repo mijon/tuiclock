@@ -1,5 +1,5 @@
 use ratatui::{
-    prelude::{Alignment, Frame},
+    prelude::{Constraint, Frame, Layout, Direction},
     style::{Color, Style},
     widgets::{Block, BorderType, Borders, Paragraph},
 };
@@ -7,10 +7,29 @@ use tui_big_text::BigText;
 
 use crate::app::App;
 
+
 pub fn render(app: &mut App, f: &mut Frame) {
+    let vert_layout = Layout::default()
+        .direction(Direction::Vertical)
+        .constraints(vec![
+            Constraint::Percentage(10),
+            Constraint::Percentage(80),
+            Constraint::Percentage(10),
+        ])
+        .split(f.size());
+
+    let horiz_layout = Layout::default()
+        .direction(Direction::Horizontal)
+        .constraints(vec![
+            Constraint::Percentage(10),
+            Constraint::Percentage(80),
+            Constraint::Percentage(10),
+        ])
+        .split(vert_layout[1]);
+
     f.render_widget(
         big_time(app.render_time()),
-        f.size()
+        horiz_layout[1]
     )
 }
 

@@ -8,6 +8,19 @@ use tui_big_text::BigText;
 use crate::app::App;
 
 
+// Layout Diagram
+//
+// +---------------------------------------------+
+// | vert_layout[0]                              |
+// +---------------------------------------------+
+// |       |                             |       |
+// | hl[0] |  horiz_layout[1]            | hl[2] | <-- vert_layout[1]
+// |       |  (clock goes here)          |       |
+// |       |                             |       |
+// +---------------------------------------------+
+// | vert_layout[2]                              |
+// +---------------------------------------------+
+
 pub fn render(app: &mut App, f: &mut Frame) {
     let vert_layout = Layout::default()
         .direction(Direction::Vertical)
